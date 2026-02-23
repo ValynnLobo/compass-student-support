@@ -93,39 +93,29 @@ streamlit run app.py
 Compass leverages managed AWS services to enable scalable, secure, and explainable student support navigation.
 
 ---
+
 ## Demo Requirements
 ### Login Requirements
-To access system, use:
-#### Email Format:
-The email must end with '@university.edu'.
-#### Example valid email:
-student@university.edu
-
-#### Student ID:
-Any non-empty value is accepted in the MVP version.
-#### Example:
-123456
+To access system, use: <br/>
+**Email Format:** The email must end with '@university.edu'. <br/>
+**Example valid email:** student@university.edu <br/>
+**Student ID:** Any non-empty value is accepted in the MVP version. <br/>
+**Example:** 123456
 
 ### Example Prompts
-
-To test Compass, try entering:
-#### Academic / Wellbeing
-"I'm feeling overwhelmed with exams and my anxiety is getting worse."
-#### Financial
-"I'm struggling to pay my tuition fees this semester."
-#### Accessibility
-"I have a visual impairment and need exam accommodations."
-#### Out-of-Scope Input
-"I want pizza."
-#### Crisis Escalation
-"I feel suicidal and don't know what to do."
+To test Compass, try entering: <br/>
+**Academic / Wellbeing:** I'm feeling overwhelmed with exams and my anxiety is getting worse." <br/>
+**Financial:** "I'm struggling to pay my tuition fees this semester."<br/>
+**Accessibility:** "I have a visual impairment and need exam accommodations."<br/>
+**Out-of-Scope Input:** "I want pizza."<br/>
+**Crisis Escalation:** "I feel suicidal and don't know what to do."<br/>
 
 You should see:
-- Clarifying questions
-- Ranked recommendations
-- Confidence scores
-- Email draft generation
-- Text-to-speech support
+- Clarifying questions.
+- Ranked recommendations.
+- Confidence scores.
+- Email draft generation.
+- Text-to-speech support.
 
 ---
 
@@ -138,18 +128,18 @@ Built as part of the AWS Diversity Hackathon to demonstrate scalable, explainabl
 This implementation represents a functional Minimum Viable Product (MVP), including:
 
 - Lightweight demo authentication (email domain check)
-- Service classification using Amazon Bedrock (Claude 3 Haiku)
-- Ranked recommendations with confidence scoring
-- Email draft generation
-- Text-to-speech responses via Amazon Polly
-- Interaction logging via Amazon DynamoDB
-- Crisis keyword detection and safety escalation
+- Service classification using Amazon Bedrock (Claude 3 Haiku).
+- Ranked recommendations with confidence scoring.
+- Email draft generation.
+- Text-to-speech responses via Amazon Polly.
+- Interaction logging via Amazon DynamoDB.
+- Crisis keyword detection and safety escalation.
 
 The MVP focuses on validating:
-- Feasibility of AI-powered triage
-- Explainability of recommendations
-- Accessibility via speech support
-- Responsible AI guardrails
+- Feasibility of AI-powered triage.
+- Explainability of recommendations.
+- Accessibility via speech support.
+- Responsible AI guardrails.
 
 ---
 
@@ -157,14 +147,14 @@ The MVP focuses on validating:
 
 A production-ready deployment would include:
 
-- Secure university authentication (SSO / Cognito / IAM federation)
-- Role-based access control (RBAC)
-- Encrypted storage and structured audit logging
-- RAG-based knowledge integration with official service documentation
-- Model evaluation and monitoring
-- Bias testing and fairness audits
-- Rate limiting and cost controls
-- API gateway and backend service separation
-- CI/CD pipeline and infrastructure as code
+- Secure university authentication (SSO / Cognito / IAM federation).
+- Role-based access control (RBAC).
+- Encrypted storage and structured audit logging.
+- RAG-based knowledge integration with official service documentation.
+- Model evaluation and monitoring.
+- Bias testing and fairness audits.
+- Rate limiting and cost controls.
+- API gateway and backend service separation.
+- CI/CD pipeline and infrastructure as code.
 
 The current MVP is intentionally scoped for demonstration purposes while showcasing architectural extensibility toward a production-grade system.
