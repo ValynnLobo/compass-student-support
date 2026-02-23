@@ -14,7 +14,6 @@ st.markdown("""
     margin: auto;
     padding-top: 40px;
 }
-
 .compass-header {
     background: linear-gradient(135deg, #A9C6D9, #E6D48F);
     padding: 30px;
@@ -22,17 +21,14 @@ st.markdown("""
     margin-bottom: 30px;
     color: #111827;
 }
-
 .compass-title {
     font-size: 28px;
     font-weight: 700;
 }
-
 .compass-sub {
     font-size: 14px;
     opacity: 0.85;
 }
-
 .user-bubble {
     background-color: #E6D48F;
     padding: 14px 18px;
@@ -41,7 +37,6 @@ st.markdown("""
     margin-bottom: 12px;
     box-shadow: 0 4px 12px rgba(0,0,0,0.25);
 }
-
 .assistant-bubble {
     background-color: #B9D9D3;
     padding: 14px 18px;
@@ -50,8 +45,6 @@ st.markdown("""
     margin-bottom: 12px;
     box-shadow: 0 4px 12px rgba(0,0,0,0.25);
 }
-
-/* Custom input styling */
 div[data-testid="stTextInput"] input {
     background-color: #1E293B !important;
     color: white !important;
@@ -63,8 +56,6 @@ div[data-testid="stTextInput"] input {
 div[data-testid="stTextInput"] input::placeholder {
     color: #94A3B8 !important;
 }
-
-/* Buttons */
 .stButton>button {
     background-color: #E6D48F;
     color: #111827;
@@ -72,25 +63,20 @@ div[data-testid="stTextInput"] input::placeholder {
     border: none;
     padding: 8px 14px;
 }
-/* Login page only */
-.login-page h1,
-.login-page h2,
-.login-page h3,
-.login-page label,
-.login-page p,
-.login-page span,
-.login-page div {
-    color: #FFFFFF !important;
+
+/* Target ALL form submit buttons deeply */
+div[data-testid="stFormSubmitButton"] > button {
+    background-color: #E6D48F !important;
+    color: #000000 !important;
+    border-radius: 14px !important;
+    border: none !important;
+    padding: 8px 14px !important;
 }
 
-/* Login input text */
-.login-page input {
-    color: #FFFFFF !important;
-}
-
-/* Login placeholder */
-.login-page input::placeholder {
-    color: #CBD5E1 !important;
+/* Force text inside button to black */
+div[data-testid="stFormSubmitButton"] > button * {
+    color: #000000 !important;
+    fill: #000000 !important;
 }
 </style>
 """, unsafe_allow_html=True)
@@ -103,22 +89,31 @@ if "authenticated" not in st.session_state:
     st.session_state.authenticated = False
 
 if not st.session_state.authenticated:
-    st.markdown('<div class="login-page">', unsafe_allow_html=True)
+
+    st.markdown("""
+    <style>
+    h1, h2, h3, label, p, span {
+        color: #FFFFFF;
+    }
+    </style>
+    """, unsafe_allow_html=True)
+
     st.title("Compass")
     st.markdown("### Secure Student Access Required")
     st.caption("Compass is available to enrolled university students only.")
 
-    email = st.text_input("University Email")
-    student_id = st.text_input("Student ID", type="password")
+    with st.form("login_form"):
+        email = st.text_input("University Email")
+        student_id = st.text_input("Student ID", type="password")
+        login_clicked = st.form_submit_button("Login")
 
-    if st.button("Login"):
-        if email.endswith("@university.edu") and student_id:
-            st.session_state.authenticated = True
-            st.rerun()
-        else:
-            st.error("Access restricted to university students.")
-            
-    st.markdown('</div>', unsafe_allow_html=True)
+        if login_clicked:
+            if email.endswith("@university.edu") and student_id:
+                st.session_state.authenticated = True
+                st.rerun()
+            else:
+                st.error("Access restricted to university students.")
+
     st.stop()
 
 
@@ -201,46 +196,46 @@ for i, msg in enumerate(st.session_state.messages):
                 st.audio(audio_bytes, format="audio/mp3")
 
 # -----------------------------
-# CUSTOM INPUT BAR
+# CHAT INPUT FORM
 # -----------------------------
 
-col1, col2 = st.columns([8, 1])
+with st.form("chat_form", clear_on_submit=True):
 
-with col1:
-    user_prompt = st.text_input(
-        "",
-        placeholder="Describe what you need help with...",
-        key="custom_input"
-    )
+    col1, col2 = st.columns([8, 1])
 
-with col2:
-    send_clicked = st.button("➤")
+    with col1:
+        user_prompt = st.text_input(
+            "",
+            placeholder="Describe what you need help with..."
+        )
 
-if send_clicked and user_prompt:
+    with col2:
+        send_clicked = st.form_submit_button("➤")
 
-    st.session_state.messages.append({
-        "role": "user",
-        "content": user_prompt
-    })
+    if send_clicked and user_prompt:
 
-    response = generate_response(user_prompt)
-
-    if "clarifying_question" in response:
-        st.session_state.pending_confirmation = True
-        st.session_state.last_response = response
         st.session_state.messages.append({
-            "role": "assistant",
-            "content": response["clarifying_question"]
-        })
-    else:
-        formatted_text = format_response(response)
-        st.session_state.messages.append({
-            "role": "assistant",
-            "content": formatted_text
+            "role": "user",
+            "content": user_prompt
         })
 
-    # DO NOT manually clear widget
-    st.rerun()
+        response = generate_response(user_prompt)
+
+        if "clarifying_question" in response:
+            st.session_state.pending_confirmation = True
+            st.session_state.last_response = response
+            st.session_state.messages.append({
+                "role": "assistant",
+                "content": response["clarifying_question"]
+            })
+        else:
+            formatted_text = format_response(response)
+            st.session_state.messages.append({
+                "role": "assistant",
+                "content": formatted_text
+            })
+
+        st.rerun()
 
 # -----------------------------
 # CONFIRMATION BUTTONS
