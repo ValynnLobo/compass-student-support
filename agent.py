@@ -169,10 +169,8 @@ def generate_response(user_input):
                 "If you're in Australia, Lifeline is available on 13 11 14."
             )
         }
-
-    # ---------------------------------------
+    
     # Confirmation Flow
-    # ---------------------------------------
     if conversation_state.get("last_detected_service"):
 
         if user_input.lower() in ["yes", "y"]:
@@ -199,7 +197,6 @@ def generate_response(user_input):
                     )
                 })
 
-            # Clear state AFTER building response
             conversation_state["last_detected_service"] = None
 
             return {
@@ -218,10 +215,7 @@ def generate_response(user_input):
                 )
             }
 
-    # ---------------------------------------
     # Initial Detection Flow
-    # ---------------------------------------
-
     bedrock_result = detect_service_with_bedrock(user_input)
 
     matched_keys = bedrock_result.get("matched_services", [])

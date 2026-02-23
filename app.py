@@ -64,7 +64,6 @@ div[data-testid="stTextInput"] input::placeholder {
     padding: 8px 14px;
 }
 
-/* Target ALL form submit buttons deeply */
 div[data-testid="stFormSubmitButton"] > button {
     background-color: #E6D48F !important;
     color: #000000 !important;
@@ -73,7 +72,6 @@ div[data-testid="stFormSubmitButton"] > button {
     padding: 8px 14px !important;
 }
 
-/* Force text inside button to black */
 div[data-testid="stFormSubmitButton"] > button * {
     color: #000000 !important;
     fill: #000000 !important;
@@ -81,10 +79,7 @@ div[data-testid="stFormSubmitButton"] > button * {
 </style>
 """, unsafe_allow_html=True)
 
-
-# -----------------------------
 # AUTHENTICATION
-# -----------------------------
 if "authenticated" not in st.session_state:
     st.session_state.authenticated = False
 
@@ -116,10 +111,7 @@ if not st.session_state.authenticated:
 
     st.stop()
 
-
-# -----------------------------
 # HEADER
-# -----------------------------
 st.sidebar.success("Logged in as student")
 
 st.markdown("""
@@ -132,9 +124,7 @@ st.markdown("""
 """, unsafe_allow_html=True)
 
 
-# -----------------------------
 # FORMAT RESPONSE
-# -----------------------------
 def format_response(response):
     assistant_text = ""
 
@@ -163,20 +153,14 @@ def format_response(response):
 
     return assistant_text
 
-
-# -----------------------------
 # SESSION STATE
-# -----------------------------
 if "messages" not in st.session_state:
     st.session_state.messages = []
 
 if "pending_confirmation" not in st.session_state:
     st.session_state.pending_confirmation = None
 
-
-# -----------------------------
 # DISPLAY MESSAGES
-# -----------------------------
 for i, msg in enumerate(st.session_state.messages):
 
     if msg["role"] == "user":
@@ -195,10 +179,7 @@ for i, msg in enumerate(st.session_state.messages):
             if audio_bytes:
                 st.audio(audio_bytes, format="audio/mp3")
 
-# -----------------------------
 # CHAT INPUT FORM
-# -----------------------------
-
 with st.form("chat_form", clear_on_submit=True):
 
     col1, col2 = st.columns([8, 1])
@@ -237,9 +218,7 @@ with st.form("chat_form", clear_on_submit=True):
 
         st.rerun()
 
-# -----------------------------
 # CONFIRMATION BUTTONS
-# -----------------------------
 if st.session_state.pending_confirmation:
 
     col1, col2 = st.columns(2)
