@@ -1,6 +1,7 @@
 ## Compass — Intelligent Student Support Navigator
 
-**Live Demo:** https://compass-student-support.streamlit.app/
+**Live Demo:** https://compass-student-support.streamlit.app/ <br/>
+
 Compass is an agentic AI system designed to help university students navigate complex support services with clarity, empathy, and actionable guidance.
 
 Universities offer a wide range of academic, wellbeing, financial, and accessibility services. However, students often experience:
