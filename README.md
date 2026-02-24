@@ -1,6 +1,7 @@
 ## Compass — Intelligent Student Support Navigator
 
 **Live Demo:** https://compass-student-support.streamlit.app/ <br/>
+**Figma Prototype:** [https://www.figma.com/compass-student-support-prototype](https://www.figma.com/proto/VL9RE5ZVPBuYYaBGYj3E3h/ANZ-Diversity-Hackathon-2026?node-id=193-2414&p=f&t=bumz12FXNDIqTEfn-1&scaling=scale-down&content-scaling=fixed&page-id=1%3A2&starting-point-node-id=193%3A2414) <br/>
 
 Compass is an agentic AI system designed to help university students navigate complex support services with clarity, empathy, and actionable guidance.
 
@@ -8,8 +9,9 @@ Universities offer a wide range of academic, wellbeing, financial, and accessibi
 
 * Uncertainty about which services apply to them.
 * Confusion around eligibility and documentation.
-* Congitive overload eligibility and documentation.
+* Cognitive overload self-navigating support systems, often during high-stress circumstances.
 * Delayed help-seeking due to fragmented information.
+* Hindered or missed support, dissatisfaction and disengagement.
 
 Compass addresses this by acting as a personalised navigation layer between students and university services.
 
